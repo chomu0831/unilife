@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UniLife 学生ポータル</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f0f8ff;
+    }
+    .section-title {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-top: 1.5rem;
+    }
+    .card {
+      margin-bottom: 1rem;
+    }
+    .navbar-brand {
+      font-size: 1.4rem;
+    }
+    .nav-link {
+      font-size: 0.95rem;
+    }
+    @media (max-width: 576px) {
+      .navbar-nav {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ログインフォーム -->
+  <div class="container mt-4" id="login-container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 col-md-8">
+        <div class="card">
+          <div class="card-header text-center">ログイン</div>
+          <div class="card-body">
+            <form onsubmit="login(event)">
+              <div class="mb-3">
+                <label for="userId" class="form-label">ユーザーID</label>
+                <input type="text" class="form-control" id="userId" required>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">パスワード</label>
+                <input type="password" class="form-control" id="password" required>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">ログイン</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ポータル画面 -->
+  <div class="container mt-3 d-none" id="portal-container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="#">UniLife</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="ナビゲーションの切り替え">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link active" href="#">時間割</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">課題</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">学食メニュー</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">カレンダー</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 今日の予定 -->
+    <div class="card">
+      <div class="card-body">
+        <div class="section-title">📅 今日の予定</div>
+        <ul class="list-unstyled" id="schedule-list">
+          <li>読み込み中...</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 課題管理 -->
+    <div class="card">
+      <div class="card-body">
+        <div class="section-title">📝 課題</div>
+        <ul class="list-group" id="assignment-list">
+          <li class="list-group-item">読み込み中...</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 月間スケジュール -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="section-title">📆 月間スケジュール</div>
+        <div id="calendar-content">読み込み中...</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function login(event) {
+      event.preventDefault();
+      const userId = document.getElementById("userId").value;
+      const password = document.getElementById("password").value;
+      if (userId === "student" && password === "unilife") {
+        document.getElementById("login-container").classList.add("d-none");
+        document.getElementById("portal-container").classList.remove("d-none");
+      } else {
+        alert("ユーザーIDまたはパスワードが違います。");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch('unipa_api/schedule.json')
+        .then(res => res.json())
+        .then(data => {
+          const scheduleList = document.getElementById("schedule-list");
+          scheduleList.innerHTML = "";
+          data.schedule.forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = item;
+            scheduleList.appendChild(li);
+          });
+        });
+
+      fetch('unipa_api/assignments.json')
+        .then(res => res.json())
+        .then(data => {
+          const assignmentList = document.getElementById("assignment-list");
+          assignmentList.innerHTML = "";
+          data.assignments.forEach(item => {
+            const li = document.createElement("li");
+            li.className = "list-group-item d-flex justify-content-between align-items-center";
+            li.innerHTML = `${item.title}<span class="badge bg-secondary">${item.status}</span>`;
+            assignmentList.appendChild(li);
+          });
+        });
+
+      fetch('unipa_api/calendar.json')
+        .then(res => res.json())
+        .then(data => {
+          const calendarContent = document.getElementById("calendar-content");
+          calendarContent.innerHTML = data.calendar.map(item => `<p>${item}</p>`).join("");
+        });
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
