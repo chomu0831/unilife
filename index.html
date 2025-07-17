@@ -35,6 +35,14 @@
       justify-content: center;
       gap: 4px;
     }
+    @media (max-width: 991.98px) {
+      .gradient-btn-group {
+        display: none;
+      }
+      .navbar-collapse.show .gradient-btn-group {
+        display: flex;
+      }
+    }
     .gradient-btn {
       border: none;
       width: 32px;
@@ -91,7 +99,7 @@
             <li class="nav-item"><a class="nav-link" href="#">カレンダー</a></li>
           </ul>
           <!-- グラデーション切り替えボタンをここに移動 -->
-          <div class="gradient-btn-group mt-3" id="gradientBtnGroup" style="display:none;">
+          <div class="gradient-btn-group mt-3" id="gradientBtnGroup",>
             <button class="gradient-btn" style="background: linear-gradient(135deg, #f0f8ff 0%, #ffe4ec 100%);" onclick="setGradient(0)" title="ブルー×ピンク"></button>
             <button class="gradient-btn" style="background: linear-gradient(135deg, #fffde4 0%, #005aa7 100%);" onclick="setGradient(1)" title="イエロー×ブルー"></button>
             <button class="gradient-btn" style="background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);" onclick="setGradient(2)" title="オレンジ×イエロー"></button>
@@ -176,20 +184,6 @@
           const calendarContent = document.getElementById("calendar-content");
           calendarContent.innerHTML = data.calendar.map(item => `<p>${item}</p>`).join("");
         });
-
-      // ハンバーガーメニューの開閉でグラデーションボタン表示切替
-      const navbarToggler = document.querySelector('.navbar-toggler');
-      const gradientBtnGroup = document.getElementById('gradientBtnGroup');
-      const navbarNav = document.getElementById('navbarNav');
-      navbarToggler.addEventListener('click', () => {
-        setTimeout(() => {
-          if (navbarNav.classList.contains('show')) {
-            gradientBtnGroup.style.display = 'flex';
-          } else {
-            gradientBtnGroup.style.display = 'none';
-          }
-        }, 300);
-      });
     });
 
     const gradients = [
