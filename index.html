@@ -53,6 +53,26 @@
       outline: 2px solid #fff;
       box-shadow: 0 1px 4px rgba(0,0,0,0.08);
     }
+    /* Slackアイコンのスタイル */
+    .slack-fab {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #4a154b;
+      color: white;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+    }
+    .slack-fab img {
+      width: 24px;
+      height: 24px;
+    }
   </style>
 </head>
 <body>
@@ -137,7 +157,17 @@
         <div id="calendar-content">読み込み中...</div>
       </div>
     </div>
-  </div>
+    <!-- Slackアイコン -->
+    <a href="https://app.slack.com/client/T06QP3G45J8/C06QLG152LB" 
+       class="slack-fab" 
+       title="Slackを開く" 
+       target="_blank" 
+       rel="noopener noreferrer">
+      <img src="https://a.slack-edge.com/80588/marketing/img/icons/icon_slack_hash_colored.png"
+           alt="Slack"
+           style="width:32px;height:32px;">
+    </a>
+  </div> <!-- ここが #portal-container の閉じタグ -->
 
   <script>
     function login(event) {
