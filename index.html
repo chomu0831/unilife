@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
     body {
-      background-color: #f0f8ff;
+      background: linear-gradient(135deg, #f0f8ff 0%, #ffe4ec 100%);
     }
     .section-title {
       font-weight: bold;
@@ -29,6 +29,21 @@
       .navbar-nav {
         text-align: center;
       }
+    }
+    .gradient-btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+    }
+    .gradient-btn {
+      border: none;
+      width: 32px;
+      height: 32px;
+      margin-left: 4px;
+      border-radius: 50%;
+      cursor: pointer;
+      outline: 2px solid #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
     }
   </style>
 </head>
@@ -62,7 +77,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand fw-bold" href="#">
-          <img src="your_icon.png" alt="UniLife" style="height:1.5em;vertical-align:middle;margin-right:0.5em;">
+          <img src="UniLife.png" alt="UniLife" style="height:1.5em;vertical-align:middle;margin-right:0.5em;">
           UniLife
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="ナビゲーションの切り替え">
@@ -75,6 +90,14 @@
             <li class="nav-item"><a class="nav-link" href="https://www.aim-kenko.jp/0002243#slick-menuCard_1"target="brank"rel="noopener noreferrer">学食メニュー</a></li>
             <li class="nav-item"><a class="nav-link" href="#">カレンダー</a></li>
           </ul>
+          <!-- グラデーション切り替えボタンをここに移動 -->
+          <div class="gradient-btn-group mt-3" id="gradientBtnGroup" style="display:none;">
+            <button class="gradient-btn" style="background: linear-gradient(135deg, #f0f8ff 0%, #ffe4ec 100%);" onclick="setGradient(0)" title="ブルー×ピンク"></button>
+            <button class="gradient-btn" style="background: linear-gradient(135deg, #fffde4 0%, #005aa7 100%);" onclick="setGradient(1)" title="イエロー×ブルー"></button>
+            <button class="gradient-btn" style="background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);" onclick="setGradient(2)" title="オレンジ×イエロー"></button>
+            <button class="gradient-btn" style="background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);" onclick="setGradient(3)" title="グリーン×ブルー"></button>
+            <button class="gradient-btn" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);" onclick="setGradient(4)" title="ベージュ×ピンク"></button>
+          </div>
         </div>
       </div>
     </nav>
@@ -153,7 +176,32 @@
           const calendarContent = document.getElementById("calendar-content");
           calendarContent.innerHTML = data.calendar.map(item => `<p>${item}</p>`).join("");
         });
+
+      // ハンバーガーメニューの開閉でグラデーションボタン表示切替
+      const navbarToggler = document.querySelector('.navbar-toggler');
+      const gradientBtnGroup = document.getElementById('gradientBtnGroup');
+      const navbarNav = document.getElementById('navbarNav');
+      navbarToggler.addEventListener('click', () => {
+        setTimeout(() => {
+          if (navbarNav.classList.contains('show')) {
+            gradientBtnGroup.style.display = 'flex';
+          } else {
+            gradientBtnGroup.style.display = 'none';
+          }
+        }, 300);
+      });
     });
+
+    const gradients = [
+      "linear-gradient(135deg, #f0f8ff 0%, #ffe4ec 100%)",
+      "linear-gradient(135deg, #fffde4 0%, #005aa7 100%)",
+      "linear-gradient(135deg, #f7971e 0%, #ffd200 100%)",
+      "linear-gradient(135deg, #43cea2 0%, #185a9d 100%)",
+      "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)"
+    ];
+    function setGradient(idx) {
+      document.body.style.background = gradients[idx];
+    }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
