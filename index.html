@@ -158,15 +158,23 @@
       </div>
     </div>
     <!-- Slackアイコン -->
-    <a href="https://app.slack.com/client/T06QP3G45J8/C06QLG152LB" 
+    <a href="#" 
        class="slack-fab" 
-       title="Slackを開く" 
-       target="_blank" 
-       rel="noopener noreferrer">
+       id="slackAppLink"
+       title="Slackを開く">
       <img src="https://a.slack-edge.com/80588/marketing/img/icons/icon_slack_hash_colored.png"
            alt="Slack"
            style="width:32px;height:32px;">
     </a>
+
+    <script>
+      document.getElementById('slackAppLink').addEventListener('click', function(e) {
+        e.preventDefault();
+        if (confirm('Slackアプリを開きますか？')) {
+          window.location.href = 'slack://open';
+        }
+      });
+    </script>
   </div> <!-- ここが #portal-container の閉じタグ -->
 
   <script>
