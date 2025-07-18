@@ -119,12 +119,51 @@
             <li class="nav-item"><a class="nav-link" href="#">カレンダー</a></li>
           </ul>
           <!-- グラデーション切り替えボタンをここに移動 -->
-          <div class="gradient-btn-group mt-3" id="gradientBtnGroup",>
+          <div class="gradient-btn-group mt-3" id="gradientBtnGroup">
             <button class="gradient-btn" style="background: linear-gradient(135deg, #f0f8ff 0%, #ffe4ec 100%);" onclick="setGradient(0)" title="ブルー×ピンク"></button>
             <button class="gradient-btn" style="background: linear-gradient(135deg, #fffde4 0%, #005aa7 100%);" onclick="setGradient(1)" title="イエロー×ブルー"></button>
             <button class="gradient-btn" style="background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);" onclick="setGradient(2)" title="オレンジ×イエロー"></button>
             <button class="gradient-btn" style="background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);" onclick="setGradient(3)" title="グリーン×ブルー"></button>
             <button class="gradient-btn" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);" onclick="setGradient(4)" title="ベージュ×ピンク"></button>
+          </div>
+
+          <!-- カスタマイズ設定 -->
+          <div class="card my-3">
+            <div class="card-body">
+              <div class="section-title">⚙️ カスタマイズ設定</div>
+              <div id="customize-settings" class="d-flex flex-wrap gap-2">
+                <div>
+                  <label class="form-check-label me-2">
+                    <input type="checkbox" class="form-check-input" id="reminderToggle" checked>
+                    講義リマインダー
+                  </label>
+                </div>
+                <div>
+                  <label class="form-check-label me-2">
+                    <input type="checkbox" class="form-check-input" id="deadlineToggle" checked>
+                    課題締め切り通知
+                  </label>
+                </div>
+                <div>
+                  <label class="form-check-label me-2">
+                    <input type="checkbox" class="form-check-input" id="eventToggle" checked>
+                    イベント情報表示
+                  </label>
+                </div>
+                <div>
+                  <label class="form-check-label me-2">
+                    <input type="checkbox" class="form-check-input" id="darkModeToggle">
+                    ダークモード
+                  </label>
+                </div>
+                <div>
+                  <label class="form-check-label me-2">
+                    <input type="checkbox" class="form-check-input" id="circleToggle" checked>
+                    サークル情報
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -155,45 +194,6 @@
       <div class="card-body">
         <div class="section-title">📆 月間スケジュール</div>
         <div id="calendar-content">読み込み中...</div>
-      </div>
-    </div>
-
-    <!-- カスタマイズ設定 -->
-    <div class="card mb-4">
-      <div class="card-body">
-        <div class="section-title">⚙️ カスタマイズ設定</div>
-        <div id="customize-settings" class="d-flex flex-wrap gap-2">
-          <div>
-            <label class="form-check-label me-2">
-              <input type="checkbox" class="form-check-input" id="reminderToggle" checked>
-              講義リマインダー
-            </label>
-          </div>
-          <div>
-            <label class="form-check-label me-2">
-              <input type="checkbox" class="form-check-input" id="deadlineToggle" checked>
-              課題締め切り通知
-            </label>
-          </div>
-          <div>
-            <label class="form-check-label me-2">
-              <input type="checkbox" class="form-check-input" id="eventToggle" checked>
-              イベント情報表示
-            </label>
-          </div>
-          <div>
-            <label class="form-check-label me-2">
-              <input type="checkbox" class="form-check-input" id="darkModeToggle">
-              ダークモード
-            </label>
-          </div>
-          <div>
-            <label class="form-check-label me-2">
-              <input type="checkbox" class="form-check-input" id="circleToggle" checked>
-              サークル情報
-            </label>
-          </div>
-        </div>
       </div>
     </div>
 
