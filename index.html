@@ -157,6 +157,46 @@
         <div id="calendar-content">読み込み中...</div>
       </div>
     </div>
+
+    <!-- カスタマイズ設定 -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="section-title">⚙️ カスタマイズ設定</div>
+        <div id="customize-settings" class="d-flex flex-wrap gap-2">
+          <div>
+            <label class="form-check-label me-2">
+              <input type="checkbox" class="form-check-input" id="reminderToggle" checked>
+              講義リマインダー
+            </label>
+          </div>
+          <div>
+            <label class="form-check-label me-2">
+              <input type="checkbox" class="form-check-input" id="deadlineToggle" checked>
+              課題締め切り通知
+            </label>
+          </div>
+          <div>
+            <label class="form-check-label me-2">
+              <input type="checkbox" class="form-check-input" id="eventToggle" checked>
+              イベント情報表示
+            </label>
+          </div>
+          <div>
+            <label class="form-check-label me-2">
+              <input type="checkbox" class="form-check-input" id="darkModeToggle">
+              ダークモード
+            </label>
+          </div>
+          <div>
+            <label class="form-check-label me-2">
+              <input type="checkbox" class="form-check-input" id="circleToggle" checked>
+              サークル情報
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Slackアイコン -->
     <a href="#" 
        class="slack-fab" 
@@ -222,6 +262,16 @@
           const calendarContent = document.getElementById("calendar-content");
           calendarContent.innerHTML = data.calendar.map(item => `<p>${item}</p>`).join("");
         });
+
+      document.getElementById('darkModeToggle').addEventListener('change', function() {
+        if (this.checked) {
+          document.body.style.background = "#222";
+          document.body.style.color = "#fff";
+        } else {
+          setGradient(0); // 初期グラデーションに戻す
+          document.body.style.color = "";
+        }
+      });
     });
 
     const gradients = [
